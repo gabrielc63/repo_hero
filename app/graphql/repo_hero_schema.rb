@@ -3,6 +3,8 @@
 class RepoHeroSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
+  max_depth 15
+  max_complexity 100
 
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
@@ -17,7 +19,7 @@ class RepoHeroSchema < GraphQL::Schema
   end
 
   # Union and Interface Resolution
-  def self.resolve_type(abstract_type, obj, ctx)
+  def self.resolve_type(_abstract_type, _obj, _ctx)
     # TODO: Implement this method
     # to return the correct GraphQL object type for `obj`
     raise(GraphQL::RequiredImplementationMissingError)
@@ -32,13 +34,13 @@ class RepoHeroSchema < GraphQL::Schema
   # Relay-style Object Identification:
 
   # Return a string UUID for `object`
-  def self.id_from_object(object, type_definition, query_ctx)
+  def self.id_from_object(object, _type_definition, _query_ctx)
     # For example, use Rails' GlobalID library (https://github.com/rails/globalid):
     object.to_gid_param
   end
 
   # Given a string UUID, find the object
-  def self.object_from_id(global_id, query_ctx)
+  def self.object_from_id(global_id, _query_ctx)
     # For example, use Rails' GlobalID library (https://github.com/rails/globalid):
     GlobalID.find(global_id)
   end
