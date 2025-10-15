@@ -4,7 +4,8 @@ class RepoHeroSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
   max_depth 15
-  max_complexity 100
+  max_page_size 20
+  # max_complexity 100
 
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
